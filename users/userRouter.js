@@ -4,7 +4,7 @@ const validation = require("../middleware");
 
 const router = express.Router();
 
-router.post("/", (req, res) => {});
+router.post("/", validation.validateUser, Users.createUser);
 
 router.post("/:id/posts", (req, res) => {});
 
@@ -20,7 +20,7 @@ router.put("/:id", (req, res) => {});
 
 //custom middleware
 
-function validateUser(req, res, next) {}
+// function validateUser(req, res, next) {}
 
 function validatePost(req, res, next) {}
 

@@ -22,6 +22,27 @@ async function validateUserId(req, res, next) {
   }
 }
 
+async function validateUser(req, res, next) {
+  const { name } = req.body;
+  console.log(req.body);
+  if (Object.keys(req.body).length !== 0) {
+    if (name) {
+      req.user = name;
+      next();
+    } else {
+      res.status(400).json({
+        status: 400,
+        message: "missing user data"
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: 400,
+      message: "missing required name field"
+    });
+  }
+}
 module.exports = {
-  validateUserId
+  validateUserId,
+  validateUser
 };

@@ -51,7 +51,7 @@ const createUser = async (req, res) => {
   try {
     const { name } = req.body;
     if (name) {
-      const newUser = await User.insert({ name });
+      const newUser = await Users.insert({ name });
       return getById(res, newUser.id, 201);
     }
     return res.status(400).json({
@@ -68,5 +68,6 @@ const createUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  getUserById
+  getUserById,
+  createUser
 };
