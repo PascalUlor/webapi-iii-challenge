@@ -1,6 +1,7 @@
 const express = require("express");
 const Posts = require("../controllers/PostControllers");
 const postValidation = require("../middleware/PostValidator");
+const validation = require("../middleware/UserValidator.js");
 
 const router = express.Router();
 
@@ -8,9 +9,16 @@ router.get("/", Posts.getAllPosts);
 
 router.get("/:id", postValidation.validatePostId, Posts.getPostById);
 
-router.delete("/:id", (req, res) => {});
+router.post("/:id/posts", postValidation.validatePost, Posts.createPost);
 
-router.put("/:id", (req, res) => {});
+router.delete("/:id", postValidation.validatePostId, Posts.deleteUser);
+
+router.put(
+  "/:id",
+  validation.validateUserId,
+  postValidation.validatePostId,
+  Posts.updatePost
+);
 
 // custom middleware
 

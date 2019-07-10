@@ -120,10 +120,10 @@ const deleteUser = async (req, res) => {
     const userId = req.params.id;
     const user = await Users.getById(userId);
     if (Object.keys(user).length !== 0) {
-      const removePost = await Users.remove(userId);
+      const removeUser = await Users.remove(userId);
       return res.status(200).json({
         status: 200,
-        data: removePost
+        data: removeUser
       });
     }
     return res.status(404).json({

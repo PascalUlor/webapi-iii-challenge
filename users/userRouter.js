@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", validation.validateUser, Users.createUser);
 
-router.post("/:id/posts", (req, res) => {});
+// router.post("/:id/posts", (req, res) => {});
 
 router.get("/", Users.getAllUsers);
 
@@ -22,6 +22,6 @@ router.put("/:id", validation.validateUserId, Users.updateUser);
 
 // function validateUser(req, res, next) {}
 
-function validatePost(req, res, next) {}
+// function validatePost(req, res, next) {}
 
 module.exports = router;

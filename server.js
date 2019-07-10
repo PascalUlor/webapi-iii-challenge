@@ -13,12 +13,16 @@ server.get("/", (req, res) => {
 //custom middleware
 
 function logger(req, res, next) {
-  console.log(`Pascals log ${req.method} ${req.originalUrl} ${new Date()}`);
+  console.log({
+    Method: req.method,
+    Url: req.originalUrl,
+    Date: new Date()
+  });
 
   res.on("finish", () => {
     console.log(
-      `${res.statusCode} ${res.statusMessage}; ${res.get("Content-Length") ||
-        0}b sent`
+      { Status: res.statusCode, Message: res.statusMessage },
+      `${res.get("Content-Length") || 0}b sent`
     );
   });
 
