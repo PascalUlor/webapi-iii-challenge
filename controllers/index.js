@@ -66,8 +66,31 @@ const createUser = async (req, res) => {
   }
 };
 
+const getPostByUser = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const userPost = await Users.getUserPosts(id);
+    if (Object.keys(userPost).length !== 0) {
+      return res.status(200).json({
+        status: 200,
+        posts: userPost
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      message: "user has no posts"
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      error: "There was an error retrieving post from database"
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
-  createUser
+  createUser,
+  getPostByUser
 };

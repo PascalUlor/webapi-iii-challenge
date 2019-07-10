@@ -12,7 +12,7 @@ router.get("/", Users.getAllUsers);
 
 router.get("/:id", validation.validateUserId, Users.getUserById);
 
-router.get("/:id/posts", (req, res) => {});
+router.get("/:id/posts", validation.validateUserId, Users.getPostByUser);
 
 router.delete("/:id", (req, res) => {});
 
