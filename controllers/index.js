@@ -115,10 +115,34 @@ const updateUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await Users.getById(userId);
+    if (Object.keys(user).length !== 0) {
+      const removePost = await Users.remove(userId);
+      return res.status(200).json({
+        status: 200,
+        data: removePost
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      message: "The user with the specified ID does not exist."
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "The user could not be removed"
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   getPostByUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

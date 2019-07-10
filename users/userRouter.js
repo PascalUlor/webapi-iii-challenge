@@ -14,7 +14,7 @@ router.get("/:id", validation.validateUserId, Users.getUserById);
 
 router.get("/:id/posts", validation.validateUserId, Users.getPostByUser);
 
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", validation.validateUserId, Users.deleteUser);
 
 router.put("/:id", validation.validateUserId, Users.updateUser);
 
