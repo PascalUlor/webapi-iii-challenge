@@ -24,7 +24,6 @@ const getAllUsers = async (req, res) => {
 const getById = async (res, id, statusCode) => {
   try {
     const user = await Users.getById(id);
-    console.log(user);
     if (user) {
       return res.status(200).json({
         status: statusCode,
@@ -45,8 +44,26 @@ const getById = async (res, id, statusCode) => {
 
 const getUserById = async (req, res) => {
   const id = req.params.id;
-  console.log(id);
   return getById(res, id, 200);
+};
+
+const createUser = async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (name) {
+      const newUser = await User.insert({ name });
+      return getById(res, newUser.id, 201);
+    }
+    return res.status(400).json({
+      status: 400,
+      errorMessage: "Please provide title and contents for the post."
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: "There was an error while saving the post to the database"
+    });
+  }
 };
 
 module.exports = {
