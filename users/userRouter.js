@@ -16,7 +16,7 @@ router.get("/:id/posts", validation.validateUserId, Users.getPostByUser);
 
 router.delete("/:id", (req, res) => {});
 
-router.put("/:id", (req, res) => {});
+router.put("/:id", validation.validateUserId, Users.updateUser);
 
 //custom middleware
 

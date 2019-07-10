@@ -88,9 +88,37 @@ const getPostByUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const userId = req.params.id;
+    const user = await Users.getById(userId);
+    if (Object.keys(user).length !== 0) {
+      if (name) {
+        const userUpdate = await Users.update(userId, { name });
+        return getById(res, userId, 200);
+      }
+      return res.status(400).json({
+        status: 400,
+        errorMessage: "Please provide name for user."
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      message: "The user with the specified ID does not exist."
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "The user information could not be modified."
+    });
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  getPostByUser
+  getPostByUser,
+  updateUser
 };
