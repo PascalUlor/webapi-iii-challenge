@@ -1,10 +1,12 @@
 // code away!
 const app = require("./server.js");
 const router = require("./users/userRouter");
+const postRouter = require("./posts/postRouter");
 
 const port = process.env.PORT || 8000;
 
-app.use("/api", router);
+app.use("/api/user", router);
+app.use("/api/post", postRouter);
 
 /**
  * All wrong routes

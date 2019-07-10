@@ -16,7 +16,7 @@ const getAllUsers = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: 500,
-      error: "The posts information could not be retrieved."
+      error: "Users could not be retrieved."
     });
   }
 };
