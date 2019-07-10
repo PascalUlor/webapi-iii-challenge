@@ -12,6 +12,18 @@ server.get("/", (req, res) => {
 
 //custom middleware
 
-function logger(req, res, next) {}
+function logger(req, res, next) {
+  console.log(`Pascals log ${req.method} ${req.originalUrl} ${new Date()}`);
 
+  res.on("finish", () => {
+    console.log(
+      `${res.statusCode} ${res.statusMessage}; ${res.get("Content-Length") ||
+        0}b sent`
+    );
+  });
+
+  next();
+}
+
+server.use(logger);
 module.exports = server;
