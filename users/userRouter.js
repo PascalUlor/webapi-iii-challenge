@@ -9,7 +9,7 @@ router.post("/:id/posts", (req, res) => {});
 
 router.get("/", Users.getAllUsers);
 
-router.get("/:id", (req, res) => {});
+router.get("/:id", Users.getUserById);
 
 router.get("/:id/posts", (req, res) => {});
 
